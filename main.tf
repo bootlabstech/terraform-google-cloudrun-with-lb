@@ -46,6 +46,7 @@ resource "google_cloud_run_service" "default" {
 # Fetch existing SSL certificate automatically
 data "google_compute_ssl_certificate" "existing_ssl" {
   name = var.existing_ssl_name
+  project = var.project
 }
 
 # Use the existing SSL certificate in Target HTTPS Proxy
