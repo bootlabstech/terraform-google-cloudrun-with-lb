@@ -45,16 +45,11 @@ variable "existing_ssl_name" {
   type        = string
   description = "Name of existing SSL certificate in GCP"
 }
-variable "load_balancing_scheme" {
-  type        = string
-  description = "Type of load balancing scheme for the Global LB (EXTERNAL or INTERNAL)."
-  default     = "EXTERNAL"
-}
 
 variable "backend_protocol" {
   type        = string
   description = "Protocol used by the backend service."
-  default     = "HTTP"
+  default     = "HTTPS"
 }
 
 variable "backend_timeout" {
@@ -78,4 +73,42 @@ variable "ingress" {
   type        = string
   description = "Controls Cloud Run ingress: choose All, Internal, or internal-and-cloud-load-balancing to allow traffic only from internal networks and external HTTPS load balancers."
   default     = "internal-and-cloud-load-balancing"
+}
+
+
+variable "lb_type" {
+  description = "Load balancer type: external or internal"
+  type        = string
+
+  validation {
+    condition     = contains(["external", "internal"], var.lb_type)
+    error_message = "lb_type must be either 'external' or 'internal'."
+  }
+}
+
+# -----------------------------
+# INTERNAL LB ONLY
+# -----------------------------
+variable "network" {
+  description = "VPC network self link (required for internal LB)"
+  type        = string
+  default     = null
+}
+
+variable "subnetwork" {
+  description = "Subnetwork self link (required for internal LB)"
+  type        = string
+  default     = null
+}
+
+variable "internal_lb_scheme" {
+  type        = string
+  description = "Type of load balancing scheme for the Global LB (EXTERNAL or INTERNAL)."
+  default     = "INTERNAL_MANAGED"
+}
+
+variable "external_lb_scheme" {
+  type        = string
+  description = "Type of load balancing scheme for the Global LB (EXTERNAL or INTERNAL)."
+  default     = "EXTERNAL_MANAGED"
 }
