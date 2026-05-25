@@ -82,7 +82,7 @@ variable "lb_type" {
 
   validation {
     condition     = contains(["external", "internal"], var.lb_type)
-    error_message = "lb_type must be either 'external' or 'internal'."
+    error_message = "The lb_type value must be either 'external' or 'internal'."
   }
 }
 
