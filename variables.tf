@@ -113,8 +113,8 @@ variable "external_lb_scheme" {
   default     = "EXTERNAL_MANAGED"
 }
 
-# variable "capacity_scaler" {
-#   type = number
-#   description = "capacity scaler"
-#   default = 1.0
-# }
+variable "capacity_scaler" {
+  type = number
+  description = "capacity scaler"
+  default = 1.0
+}
