@@ -112,3 +112,9 @@ variable "external_lb_scheme" {
   description = "Type of load balancing scheme for the Global LB (EXTERNAL or INTERNAL)."
   default     = "EXTERNAL_MANAGED"
 }
+
+variable "capacity_scaler" {
+  type = number
+  description = "capacity scaler"
+  default = 1.0
+}

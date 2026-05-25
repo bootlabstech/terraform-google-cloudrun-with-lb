@@ -100,6 +100,7 @@ resource "google_compute_backend_service" "external_backend" {
 
   backend {
     group = google_compute_region_network_endpoint_group.neg.id
+    capacity_scaler = var.capacity_scaler
   }
 
   security_policy = google_compute_security_policy.ext_policy[0].id
@@ -117,6 +118,7 @@ resource "google_compute_region_backend_service" "internal_backend" {
 
   backend {
     group = google_compute_region_network_endpoint_group.neg.id
+    capacity_scaler = var.capacity_scaler
   }
 }
 
