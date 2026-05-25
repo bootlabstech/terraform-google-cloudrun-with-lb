@@ -202,7 +202,7 @@ resource "google_compute_global_forwarding_rule" "external_fr" {
   target                 = google_compute_target_https_proxy.external_proxy[0].id
   port_range             = var.global_fw_portrange
   ip_protocol            = var.global_fw_ipprotocol
-  load_balancing_scheme  = "EXTERNAL_MANAGED"
+  load_balancing_scheme  = "EXTERNAL"
   ip_address             = google_compute_global_address.external_ip[0].address
 }
 
