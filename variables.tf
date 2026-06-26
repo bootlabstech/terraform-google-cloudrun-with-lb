@@ -118,3 +118,26 @@ variable "capacity_scaler" {
   description = "capacity scaler"
   default = 1.0
 }
+# SSL BUCKET to create SSL CERTIFICATE automatically
+
+variable "ssl_bucket" {
+  description = "Name of the Google Cloud Storage bucket containing the SSL certificate and private key."
+  type        = string
+}
+
+variable "ssl_cert_object" {
+  description = "Name of the SSL certificate file stored in the GCS bucket."
+  type        = string
+  default     = "*.crt"
+}
+
+variable "ssl_key_object" {
+  description = "Name of the private key file stored in the GCS bucket."
+  type        = string
+  default     = "*.key"
+}
+
+variable "ssl_certificate_name" {
+  description = "Name to assign to the Google Cloud SSL certificate resource."
+  type        = string
+}
