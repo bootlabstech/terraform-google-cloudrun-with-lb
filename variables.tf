@@ -41,10 +41,10 @@ variable "vpc_connector_self_link" {
   description = "The self link of host project vpc connector"
 }
 
-variable "existing_ssl_name" {
-  type        = string
-  description = "Name of existing SSL certificate in GCP"
-}
+# variable "existing_ssl_name" {
+#   type        = string
+#   description = "Name of existing SSL certificate in GCP"
+# }
 
 variable "backend_protocol" {
   type        = string
