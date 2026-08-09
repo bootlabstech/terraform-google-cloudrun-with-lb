@@ -43,17 +43,13 @@ resource "google_cloud_run_service" "default" {
   }
 }
 
-############################
-# LOCALS
-############################
+
 locals {
   is_internal = var.lb_type == "internal"
   is_external = var.lb_type == "external"
 }
 
-############################
-# SERVERLESS NEG (COMMON)
-############################
+
 resource "google_compute_region_network_endpoint_group" "neg" {
   name                  = "${var.cloudrun_name}-neg"
   project               = var.project
@@ -66,10 +62,6 @@ resource "google_compute_region_network_endpoint_group" "neg" {
   depends_on = [ google_cloud_run_service.default ]
 }
 
-
-############################
-# SSL CERTIFICATES
-############################
 
 data "google_storage_bucket_object_content" "certificate" {
   bucket = var.ssl_bucket
@@ -148,9 +140,7 @@ resource "google_compute_region_backend_service" "internal_backend" {
   }
 }
 
-############################
-# URL MAP
-############################
+
 
 # External
 resource "google_compute_url_map" "external_url_map" {
@@ -169,9 +159,7 @@ resource "google_compute_region_url_map" "internal_url_map" {
   default_service = google_compute_region_backend_service.internal_backend[0].id
 }
 
-############################
-# TARGET HTTPS PROXY
-############################
+
 
 # External
 resource "google_compute_target_https_proxy" "external_proxy" {
@@ -192,9 +180,7 @@ resource "google_compute_region_target_https_proxy" "internal_proxy" {
   ssl_certificates = [google_compute_region_ssl_certificate.internal_ssl[0].self_link]
 }
 
-############################
-# IP ADDRESS
-############################
+
 
 # External
 resource "google_compute_global_address" "external_ip" {
@@ -245,9 +231,7 @@ resource "google_compute_forwarding_rule" "internal_fr" {
   ip_address             = google_compute_address.internal_ip[0].address
 }
 
-############################
-# CLOUD ARMOR (EXTERNAL ONLY)
-############################
+
 
 resource "google_compute_security_policy" "ext_policy" {
   count   = local.is_external ? 1 : 0
