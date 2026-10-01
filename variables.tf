@@ -33,7 +33,7 @@ variable "max_scale" {
 variable "egress_traffic" {
   description = "Allowed egress for the connector.Can be either of private-ranges-only and all-traffic."
   type        = string
-  default = "private-ranges-only"
+  default     = "private-ranges-only"
 }
 
 variable "vpc_connector_self_link" {
@@ -114,9 +114,9 @@ variable "external_lb_scheme" {
 }
 
 variable "capacity_scaler" {
-  type = number
+  type        = number
   description = "capacity scaler"
-  default = 1.0
+  default     = 1.0
 }
 # SSL BUCKET to create SSL CERTIFICATE automatically
 
@@ -139,5 +139,10 @@ variable "ssl_key_object" {
 
 variable "ssl_certificate_name" {
   description = "Name to assign to the Google Cloud SSL certificate resource."
+  type        = string
+}
+
+variable "host_project_id" {
+  description = "host project id to add access to cloud run service agent"
   type        = string
 }
