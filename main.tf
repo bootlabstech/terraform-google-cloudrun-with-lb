@@ -99,8 +99,7 @@ lifecycle {
     template[0].spec[0].containers[0].image,
     template[0].spec[0].containers[0].resources[0].limits,
     template[0].spec[0].containers[0].volume_mounts,
-    template[0].spec[0].volumes,
-    template[0].service_account
+    template[0].spec[0].volumes
   ]
 }
 
