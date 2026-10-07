@@ -93,11 +93,16 @@ resource "google_cloud_run_service" "default" {
     }
   }
 
-  lifecycle {
-    ignore_changes = [
-      template[0].spec[0].containers[0].env
-    ]
-  }
+lifecycle {
+  ignore_changes = [
+    template[0].spec[0].containers[0].env,
+    template[0].spec[0].containers[0].image,
+    template[0].spec[0].containers[0].resources[0].limits,
+    template[0].spec[0].containers[0].volume_mounts,
+    template[0].spec[0].volumes,
+    template[0].service_account
+  ]
+}
 
   depends_on = [
     google_project_iam_member.run_network_user,
@@ -358,4 +363,9 @@ resource "google_compute_security_policy" "ext_policy" {
       }
     }
   }
+ lifecycle {
+  ignore_changes = [
+    rule
+  ]
+} 
 }
